@@ -1,0 +1,20 @@
+<section>
+  <main *ngFor="let post of posts" class="flex-1 overflow-y-auto p-2 md:p-5">
+    <uh-post [post]="post"
+             [profile]="profile"
+             [hasLike]="isPostLikedByUser(post)"
+             [areYouIn]="hasUserJoined(post)"
+    ></uh-post>
+  </main>
+  <div *ngIf="posts.length === 0" class="flex-1 overflow-y-auto p-2 md:p-5">
+    <p>Looks like there is nothing to display here!</p>
+  </div>
+  <div class="sticky w-full text-center bottom-32" [hidden]="!showCreate">
+    <a [routerLink]="['/create']"
+       class="shadow-button absolute right-8 md:right-12 top-0 bg-navy text-white p-2 rounded-full transition duration-200 ease-in hover:bg-white m-2">
+      <svg class="h-12 w-12 hover:text-navy" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+    </a>
+  </div>
+</section>

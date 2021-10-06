@@ -1,0 +1,29 @@
+<header class="py-3 md:py-5 bg-white text-black text-center">
+  <nav class="flex flex-row flex-algin items-center content-center justify-between">
+    <a [routerLink]="['/feed']">
+      <img class="object-left object-contain pl-5 h-10 flex-row" src="../../../assets/images/main-logo.svg" />
+    </a>
+    <h1 class="flex-row text-3xl cursor-pointer inline-flex items-center" (click)="openMenu = !openMenu">Let's
+      <svg
+        *ngIf="!openMenu"
+        class="inline-block animate-bounce duration-1000 ml-2 h-6 w-6"
+        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      </svg>
+      <svg
+        *ngIf="openMenu"
+        class="inline-block animate-bounce duration-1000 ml-2 h-6 w-6"
+        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+      </svg>
+    </h1>
+    <uh-user-avatar [picture]="picture()"></uh-user-avatar>
+  </nav>
+  <div class="w-full pt-3 md:pt-5 bg-white scroll pb-0" [ngClass]="{'hidden': !openMenu}">
+    <ul class="list-reset flex flex-row justify-around w-full items-center text-base bounce-in-right">
+      <li class="mr-1" *ngFor="let category of categories">
+        <uh-categories [category]="category" (click)="categoryClicked(category)"></uh-categories>
+      </li>
+    </ul>
+  </div>
+</header>

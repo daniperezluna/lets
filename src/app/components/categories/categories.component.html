@@ -1,0 +1,7 @@
+<button 
+  class="my-2 py-2 no-underline hover:no-underline hover:text-white flex items-center justify-between bg-transparent hover:bg-{{category}} hover:bg-opacity-50 focus:border-teal-900 font-bold px-5 rounded"
+  [ngClass]="getCssClasses()"
+  (click)="isActive = !isActive">
+  <img class="object-left object-contain h-6 flex-row" src="../../../assets/images/{{category}}.svg" />          
+  <span class="pl-2 hidden md:inline-block capitalize">{{category}}</span>
+</button>

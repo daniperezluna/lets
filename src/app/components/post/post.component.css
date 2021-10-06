@@ -1,0 +1,9 @@
+.red {
+  fill: red;
+  stroke: none;
+}
+
+.fill-none {
+  fill: none;
+  stroke: black;
+}

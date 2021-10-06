@@ -1,0 +1,29 @@
+<section class="pt-8">
+  <article class="flex-1 overflow-y-auto p-2 md:p-5">
+    <p class="text-2xl">Profile</p>
+    <p class="text-xl">Username: </p><span>{{(profileService.profile$ | async)?.username }}</span>
+    <p class="text-xl">Email: </p><span>{{(profileService.profile$ | async)?.user?.email }}</span>
+    <button (click)="logout()"
+    class="w-1/8 flex m-auto px-4 py-2 text-base font-semibold text-center text-white transition duration-200 ease-in bg-navy shadow-md hover:text-navy hover:bg-white focus:outline-none focus:ring-2">
+      <span class="w-full">
+        Log out
+      </span>
+    </button>
+  </article>
+</section>
+<h1 class="flex-1 overflow-y-auto p-2 md:p-5"> Post you liked</h1>
+<uh-feed
+  [posts]="likedPosts"
+  [likedPosts]="likedPostsIds()"
+  [joinedPosts]="joinedPostsIds()"
+  [profile]="profile"
+  [showCreate]="false"
+></uh-feed>
+<h1 class="flex-1 overflow-y-auto p-2 md:p-5">Post you created</h1>
+<uh-feed
+  [profile]="profile"
+  [posts]="createdPosts"
+  [likedPosts]="likedPostsIds()"
+  [joinedPosts]="joinedPostsIds()"
+  [showCreate]="true"
+></uh-feed>

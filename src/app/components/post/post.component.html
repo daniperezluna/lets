@@ -1,0 +1,33 @@
+<article class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden mb-2 md:max-w-5xl">
+  <div class="md:flex">
+    <div class="md:flex-shrink-0">
+      <img class="h-52 w-full object-cover md:w-48" [src]="post.image_url" alt="The image of the event">
+    </div>
+    <div class="bg-{{post.category.toLowerCase()}} w-full md:w-6">
+      <p class="md:-rotate-90 h-full transform flex flex-col p-1 md:p-2 text-center text-uppercase text-white align-middle justify-center" >
+        {{post.category === "INFORM" ? "SHARE" : post.category }}</p>
+    </div>
+    <div class="p-4 rounded-b-xl md:rounded-r-xl md:rounded-bl-none w-full">
+      <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{{post.type}}</div>
+      <a routerLink="/content/{{post.id}}" class="block mt-1 text-lg leading-tight font-medium text-black hover:underline">{{post.title}}</a>
+      <p class="mt-2 text-gray-500">{{post.description}}</p>
+      <button (click)="joinEvent()"
+        *ngIf="post.type === 'EVENT'"
+        [ngClass]="areYouIn ? 'disabled pointer-events-none bg-gray-400' : 'bg-navy '"
+        class="w-1/8 m-auto mt-6 p-2 text-base font-semibold text-center text-white transition duration-200 ease-in shadow-md hover:text-navy hover:bg-white focus:outline-none focus:ring-2">
+        <span class="w-full p-2">
+          {{areYouIn ? 'You already joined' : 'Join Event' }}
+        </span>
+      </button>
+    </div>
+    <div class="md:flex p-4">
+      <svg
+        class="h-6 w-6 cursor-pointer"
+        [ngClass]="hasLike ? 'red' : 'fill-none'"
+        viewBox="0 0 24 24"
+        (click)="followPost()">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+      </svg>
+    </div>
+  </div>
+</article>
