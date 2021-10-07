@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
     this.profileService.profile$.subscribe(profile => {
       this.profile = profile;
     });
-    this.categoriesService.categorySelection$.next(this.categories.map(x => x.toUpperCase()));
   }
 
   picture(): string {
