@@ -47,7 +47,7 @@ export class PostService {
     const resp = await this.supabase.getClient().from('post')
       .select('*')
       .filter('due_to', 'gt', new Date().toISOString())
-      .order('inserted_at', {ascending: true});
+      .order('inserted_at', {ascending: false});
 
     if (resp.error) {
       throw `Could not retrieve posts for ${JSON.stringify(resp.error)}`;
