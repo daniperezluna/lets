@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from "src/app/supabase/auth.service";
 @Component({
   selector: 'uh-login',
@@ -11,11 +11,17 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   errorMessage: string;
+  validationMessage!: string;
+  isAdminRole: boolean = false;
 
   constructor(
     private authService: AuthService,
     private router: Router,
+    private route: ActivatedRoute
   ) {
+    this.route.params.subscribe(params => {
+      params['role'] === "admin" ? this.isAdminRole = true : ''
+    });
     this.errorMessage = '';
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -52,7 +58,7 @@ export class LoginComponent implements OnInit {
         () => {
             this.router.navigate(['/feed']);
         })
-       .catch(error => console.log(`Login error: ${JSON.stringify(error)}`));
+       .catch(reason => this.validationMessage = reason.message);
   }
 }
 

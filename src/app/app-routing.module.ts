@@ -12,6 +12,7 @@ import {MainContentComponent} from "./components/main-content/main-content.compo
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'login/:role', component: LoginComponent },
   {
     path: 'feed', component: MainContentComponent, canActivate: [AuthGuard]
   },
