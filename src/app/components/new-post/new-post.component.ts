@@ -19,8 +19,10 @@ export class NewPostComponent {
   file: File | null = null;
   imageUrl: string | null = null;
   profile: Profile | null = null;
-  successMessage: boolean = false;
-  failureMessage: boolean = false;
+  successMessage!: boolean;
+  failureMessage!: {
+    message: string
+  };
   allCategories = [
     "EAT",
     "MEET",
@@ -106,7 +108,9 @@ export class NewPostComponent {
 
   async submit() {
     if ( this.newPostForm.invalid || !this.file ) {
-      this.failureMessage = true;
+      this.failureMessage = {
+        message: "Make sure that all required fields are filled"
+      };
       return;
     } else {
 
@@ -127,17 +131,19 @@ export class NewPostComponent {
 
       if(this.post) {
       // Upload it to the backend
-      this.postService.createPost(this.post);
-
-      // Display success message
-        this.failureMessage = false;
-        this.successMessage = true;
+      this.postService.createPost(this.post)
+        .then(() => {
+            this.failureMessage.message = '';
+            this.successMessage = true;
+            // Navigate back to the feed after 3 seconds
+            this.delay(2000);
+            this.router.navigate(['/feed']);
+          }
+        ).catch(error => {
+          this.failureMessage = error;
+          console.log(error);
+        });
       }
-
-      // Navigate back to the feed after 3 seconds
-      await this.delay(3000);
-      await this.router.navigate(['/feed']);
     }
   }
-
 }

@@ -4,10 +4,10 @@
     Success!
   </div>
   <div *ngIf="failureMessage" class="alert-red" role="alert">
-    Opps! Something went wrong!
+    {{failureMessage.message}}  
   </div>
   <div class="w-full pt-3 md:pt-5 scroll pb-0">
-    <span class="text-gray-700">Post Type</span>
+    <span class="text-gray-700">Post Type *</span>
     <ul 
       class="list-reset flex flex-row justify-around w-full items-center text-base bounce-in-right"
       id="categories">
@@ -20,10 +20,10 @@
     </ul>
   </div>
   <div class="flex flex-row align-center justify-center max-w-4xl m-auto">
-    <div class="w-full flex flex-row align-center justify-center">
+    <div class="w-full flex flex-row align-center justify-center mb-10">
       <form [formGroup]="newPostForm" type="submit" class="flex flex-col w-full">
         <label class="block py-5">
-          <span class="text-gray-700">What type of event is it?</span>
+          <span class="text-gray-700">In which category this post fits? *</span>
           <select formControlName="category" (change)="updateCategory($event)" class="block w-full mt-0 px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black">
             <option value="Select Category" disabled>Select Category</option>
             <option *ngFor="let category of allCategories" [ngValue]="category">
@@ -32,14 +32,14 @@
           </select>
         </label>
         <label class="block py-5">
-          <span class="text-gray-700">Title</span>
+          <span class="text-gray-700">Title *</span>
           <input
             formControlName="title"
             type="text" placeholder=""
             class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black">
         </label>
         <label class="block py-5">
-          <span class="text-gray-700">Description</span>
+          <span class="text-gray-700">Description *</span>
           <textarea
             formControlName="description"
             rows="2"
@@ -66,7 +66,7 @@
           </textarea>
         </label>
         <label class="block py-5">
-          <span class="text-gray-700">Post Image</span>
+          <span class="text-gray-700">Post Image *</span>
           <input
             formControlName="image"
             type="file"
@@ -74,7 +74,7 @@
             class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black">
         </label>
         <label class="block py-5" *ngIf="this.selectedPostType === 'Event'">
-          <span class="text-gray-700">When is your event?</span>
+          <span class="text-gray-700">When is your event? *</span>
           <input
             formControlName="eventDate"
             type="datetime-local"
@@ -82,8 +82,8 @@
             class="mt-0 block w-full px-0.5 border-0 border-b-2 border-gray-200 focus:ring-0 focus:border-black">
         </label>
         <label class="block py-5" *ngIf="this.selectedPostType === 'Event' || this.selectedPostType === 'News'">
-          <span *ngIf="this.selectedPostType === 'Event'" class="text-gray-700">What is the due date to join?</span>
-          <span *ngIf="this.selectedPostType === 'News'" class="text-gray-700">Until when the news is relevant?</span>
+          <span *ngIf="this.selectedPostType === 'Event'" class="text-gray-700">What is the due date to join? *</span>
+          <span *ngIf="this.selectedPostType === 'News'" class="text-gray-700">Until when the news is relevant? *</span>
           <input
             formControlName="dueDate"
             type="datetime-local"

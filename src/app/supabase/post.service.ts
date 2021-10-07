@@ -14,15 +14,16 @@ export class PostService {
   ) {
   }
 
-  createPost(post: PostDTO) {
-    this.supabase.getClient()
+  async createPost(post: PostDTO): Promise<string> {
+    const resp = await this.supabase.getClient()
       .from('post')
       .insert([post])
-      .then(resp => {
-        if (resp.error) {
-          console.log(resp.error);
-        }
-      });
+
+    if(resp.error) {
+      throw resp.error;
+    }
+    
+    return "OK";
   }
 
   async getPost(post_id: number): Promise<PostDTO> {
