@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
-      alert('Already logged in!');
       this.router.navigate(['/feed']);
     }
   }
